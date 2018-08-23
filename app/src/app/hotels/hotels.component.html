@@ -1,0 +1,75 @@
+<div class="container general-content mw-100">
+
+  <div class="row">
+
+    <section class="col-md-12 col-lg-4 sidebar col-sm-12 col-xl-3" >
+      <h1 class="box-content title">Filtros</h1>
+
+      <article class="box-content">
+        <label><span class="icon-search"></span>  Nombre de hotel <div class="arrow" data-target="#filter1" data-toggle="collapse"></div></label>
+        <div id="filter1" class="collapsed show">
+        <input type="text" [(ngModel)]=hotelName placeholder="Nombre del hotel">
+        <button (click)=searchHotel() class="btn-send">Aceptar</button>
+        </div>
+      </article>
+
+
+      <article class="box-content filter-stars">
+        <label class="subtitle"><span class="icon-star"></span>  Estrellas <div class="arrow" data-target="#filter2" data-toggle="collapse"></div></label>
+        <div id="filter2" class="collapsed show">
+          <div *ngFor="let filterItem of filterItems; let i = index;" class="form-check" style="padding-right:20px;">
+            <input type="radio" class="form-check-input" [(ngModel)]="filterItem.checked" (change)=searchStars(filterItem.value,filterItem.checked) [value]="filterItem.value">
+            <label *ngIf="filterItem.value == 0" class="form-check-label">Todas las estrellas</label>
+            <label *ngIf="filterItem.value == 5" class="form-check-label"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></label>
+            <label *ngIf="filterItem.value == 4" class="form-check-label"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></label>
+            <label *ngIf="filterItem.value == 3" class="form-check-label"><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span></label>
+            <label *ngIf="filterItem.value == 2" class="form-check-label"><span class="icon-star"></span><span class="icon-star"></span></label>
+            <label *ngIf="filterItem.value == 1" class="form-check-label"><span class="icon-star"></span></label>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section class="col-md-12 col-sm-12 col-lg-8 col-xl-9" >
+
+
+    <article class="box-content hotel"  *ngFor="let hotel of hotels">
+      <div class="row align-items-center">
+        <div class="col-lg-4 col-sm-12">
+          <img class="img-hotel" src="../assets/images/hotels/{{ hotel.image }}" alt="">
+        </div>
+        <div class="col-lg-5 col-sm-12">
+          <h2>{{ hotel.name }}</h2>
+          <div class="stars" *ngIf="hotel.stars == 1">
+              <span class="icon-star"></span>
+          </div>
+          <div class="stars" *ngIf="hotel.stars == 2">
+              <span class="icon-star"></span><span class="icon-star"></span>
+          </div>
+          <div class="stars" *ngIf="hotel.stars == 3">
+              <span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span>
+          </div>
+          <div class="stars" *ngIf="hotel.stars == 4">
+              <span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span>
+          </div>
+          <div class="stars" *ngIf="hotel.stars == 5">
+              <span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span><span class="icon-star"></span>
+          </div>
+          <div class="amenities">
+            <img *ngFor="let amenity of hotel.amenities" src="../assets/icons/amenities/{{ amenity }}.svg" alt="">
+          </div>
+
+        </div>
+        <div class="col-lg-3 price-pay col-sm-12">
+            <p>Precio por noche por habitacion</p>
+            <div class="price">ARS <span>{{ hotel.price }}</span></div>
+            <a class="btn-hotel" href="">Ver hotel</a>
+        </div>
+      </div>
+    </article>
+
+    </section>
+  </div>
+</div>
+
+
+
